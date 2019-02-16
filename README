@@ -1,0 +1,46 @@
+-------------------------------------------------------------------------------
+Vlad Marius-Cătălin 325CD
+Anul II Semestrul I
+Tema3 Programare Orientată pe Obiect
+-------------------------------------------------------------------------------
+
+    ObservableFIFOCache:
+    Se foloseste o instanta de FIFOCache in interiorul clasei si este folo-
+sita in toate metodele clasei principale. In metoda get se cauta cheia, daca
+nu a fost gasita se genereaza un Miss si in caz contrar un Hit. Operatiile se
+semnaleaza tuturor ascultatorilor din broadcast listener. Asemanator pentru
+put, se adauga cheia si valoarea asociata in FIFO si se semnaleaza asculta-
+torii cu Put.
+
+    LRUCache:
+    Se foloseste HashMap pentru asocierea cheie-valoare si o lista dublu in-
+lantuita. Nodurile din lista contin pe langa cheie, valoare si referinte la
+elementele anterior si precedent, o variabila ce memoreaza timpul cand a fost
+adaugat sau modificat ultima data nodul. Alaturi de metodele tipice listelor
+dublu inlantuite, se afla o metoda care muta un element la inceputul listei
+si o metoda care sterge ultimul element.
+    Tabela de dispersie asigura operatia de get in timp constant, lista este
+folosita pentru a retine ordinea in care elementele au fost folosite. La in-
+cuputul acesteia se afla elementele cele mai des utilizare, iar la final cele
+cel mai putin utilizate. Astfel, pentru operatia de put, se adauga elementul
+la inceputul listei si daca s-a depasit capacitatea maxima a cahe-ului, se
+sterge ultimul element din lista in timp constant.
+
+    TimeAwareCache:
+    Se folosesc aceleasi operatii de get si put din LRUCache, insa, in loc
+sa se stearga elementele de la finalul listei, se sterg toate elementele cu
+diferenta dintre timpul curent si timpul din nod mai mare decat millisToExpire.
+
+    StatsListener:
+    Retine 3 variabile statice, le initializeaza cu zero si la fiecare eveni-
+ment de tip hitt, miss, put creste variabila respectiva.
+
+    KeyStatsListener:
+    Retine 3 TreeMap pentru evenimentele hit, miss si put cu cheile din cache
+si frecventa operatiilor respective. La generarea a N cele mai frecvente chei,
+se pun valorile intr-un TreeSet care sorteaza cheile in ordine descrescatoare
+dupa numarul lor de aparitii si se iau primele N valori.
+
+    BroadcastListener:
+    Se retine o lista de ascultatori si la fiecare operatie de tip hit, miss
+si put se apeleaza functiile respective din toti ascultatorii din lista.
